@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         vm.delegate = self
+        vm.loadData()
     }
     
     func setupTableView() {
@@ -56,8 +57,26 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let model = vm.modelForItemAt(indexPath)
-        cell.textLabel?.text = model.title
+        
+        var content = cell.defaultContentConfiguration()
+        content.text = model.title
+        content.secondaryText = model.hasNextCategory ? "next category" : ""
+        cell.contentConfiguration = content
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let model = vm.modelForItemAt(indexPath)
+        if model.hasNextCategory {
+            print("[didSelectRowAt] section:\(indexPath.section) | row:\(indexPath.item)")
+            vm.loadData(at: indexPath)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Section: \(section)"
     }
     
 }

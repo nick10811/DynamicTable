@@ -12,18 +12,18 @@ protocol LoadingDelegate {
     func loadingError(_ error: Error)
 }
 
-struct Model {
-    var title: String
-    
-    init(_ indexPath: IndexPath) {
-        title = "[section:\(indexPath.section): item:\(indexPath.item)]"
-    }
-}
-
 class ViewModel {
     var delegate: LoadingDelegate?
     
+    private var dataSet: [Model] = []
+    
     func loadData() {
+        dataSet.removeAll()
+        dataSet.append(contentsOf: DataSource.generateData())
+    }
+    
+    func loadData(at: IndexPath) {
+        
     }
     
     var numberOfItemsInSection: Int {
@@ -33,11 +33,11 @@ class ViewModel {
     }
     
     func numberOfItemsInSection(_ section: Int) -> Int {
-        return 10
+        return dataSet.count
     }
     
     func modelForItemAt(_ indexPath: IndexPath) -> Model {
-        return Model(indexPath)
+        return dataSet[indexPath.item]
     }
 }
 
