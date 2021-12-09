@@ -9,15 +9,18 @@ import UIKit
 
 class ViewController: UIViewController {
     var tableView: UITableView!
+    let cellIdentifier: String = "Cell"
+    lazy var vm: ViewModel = ViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        vm.delegate = self
     }
     
     func setupTableView() {
         self.tableView = UITableView()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         self.view.addSubview(self.tableView)
         self.tableView.frame = self.view.frame
         
@@ -40,20 +43,36 @@ class ViewController: UIViewController {
 
 }
 
-// MARK: - UITableViewDataSource & UITableViewDelegate
+// MARK:- UITableViewDataSource & UITableViewDelegate
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return vm.numberOfItemsInSection
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return vm.numberOfItemsInSection(section)
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = "Hello World"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let model = vm.modelForItemAt(indexPath)
+        cell.textLabel?.text = model.title
         return cell
+    }
+    
+}
+
+// MARK:- LoadingDelegate
+extension ViewController: LoadingDelegate {
+    func loadingDone() {
+        self.tableView.reloadData()
+    }
+    
+    func loadingError(_ error: Error) {
+        let alert = UIAlertController(title: "Error", message: "somthing wrong", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

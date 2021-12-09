@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F300CC012761B8FA00C87A47 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F300CC002761B8FA00C87A47 /* ViewModel.swift */; };
 		F36FC8782761AB0300B087FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FC8772761AB0300B087FE /* AppDelegate.swift */; };
 		F36FC87A2761AB0300B087FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FC8792761AB0300B087FE /* SceneDelegate.swift */; };
 		F36FC87C2761AB0300B087FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36FC87B2761AB0300B087FE /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F300CC002761B8FA00C87A47 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		F36FC8742761AB0300B087FE /* DynamicTable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamicTable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36FC8772761AB0300B087FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F36FC8792761AB0300B087FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				F36FC8772761AB0300B087FE /* AppDelegate.swift */,
 				F36FC8792761AB0300B087FE /* SceneDelegate.swift */,
 				F36FC87B2761AB0300B087FE /* ViewController.swift */,
+				F300CC002761B8FA00C87A47 /* ViewModel.swift */,
 				F36FC87D2761AB0300B087FE /* Main.storyboard */,
 				F36FC8802761AB0500B087FE /* Assets.xcassets */,
 				F36FC8822761AB0500B087FE /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			files = (
 				F36FC87C2761AB0300B087FE /* ViewController.swift in Sources */,
 				F36FC8782761AB0300B087FE /* AppDelegate.swift in Sources */,
+				F300CC012761B8FA00C87A47 /* ViewModel.swift in Sources */,
 				F36FC87A2761AB0300B087FE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
