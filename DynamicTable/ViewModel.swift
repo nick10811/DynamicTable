@@ -18,6 +18,10 @@ class ViewModel {
     struct SectionModel {
         var section: Int
         var items: [Model]
+        
+        subscript (_ index: Int) -> Model {
+            return items[index]
+        }
     }
     
     private var sectionSet: [SectionModel] = []
@@ -48,6 +52,12 @@ class ViewModel {
     }
     
     func modelForItemAt(_ indexPath: IndexPath) -> Model {
-        return sectionSet[indexPath.section].items[indexPath.item]
+        return sectionSet[indexPath]
+    }
+}
+
+extension Array {
+    subscript(_ indexPath: IndexPath) -> Model {
+        return (self[indexPath.section] as! ViewModel.SectionModel)[indexPath.item]
     }
 }
