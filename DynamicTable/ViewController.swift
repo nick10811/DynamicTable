@@ -44,7 +44,7 @@ class ViewController: UIViewController {
 
 }
 
-// MARK:- UITableViewDataSource & UITableViewDelegate
+// MARK: - UITableViewDataSource & UITableViewDelegate
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     public func numberOfSections(in tableView: UITableView) -> Int {
         return vm.numberOfItemsInSection
@@ -81,7 +81,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-// MARK:- LoadingDelegate
+// MARK: - LoadingDelegate
 extension ViewController: LoadingDelegate {
     func loadingDone() {
         self.tableView.reloadData()
