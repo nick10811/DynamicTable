@@ -15,29 +15,39 @@ protocol LoadingDelegate {
 class ViewModel {
     var delegate: LoadingDelegate?
     
-    private var dataSet: [Model] = []
+    struct SectionModel {
+        var section: Int
+        var items: [Model]
+    }
+    
+    private var sectionSet: [SectionModel] = []
     
     func loadData() {
-        dataSet.removeAll()
-        dataSet.append(contentsOf: DataSource.generateData())
+        sectionSet.removeAll()
+        sectionSet.append(SectionModel(section: 0, items: DataSource.generateData()))
+        delegate?.loadingDone()
     }
     
     func loadData(at: IndexPath) {
+        sectionSet = sectionSet.filter{ $0.section <= at.section }
+        
+        let next = at.section + 1
+        sectionSet.append(SectionModel(section: next, items: DataSource.generateData(next)))
+        delegate?.loadingDone()
         
     }
     
     var numberOfItemsInSection: Int {
         get {
-            return 1
+            return sectionSet.count
         }
     }
     
     func numberOfItemsInSection(_ section: Int) -> Int {
-        return dataSet.count
+        return sectionSet[section].items.count
     }
     
     func modelForItemAt(_ indexPath: IndexPath) -> Model {
-        return dataSet[indexPath.item]
+        return sectionSet[indexPath.section].items[indexPath.item]
     }
 }
-
