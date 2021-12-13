@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol LoadingDelegate {
+protocol LoadingDelegate: AnyObject {
     func loadingDone()
     func loadingError(_ error: Error)
 }
 
 class ViewModel {
-    var delegate: LoadingDelegate?
+    weak var delegate: LoadingDelegate?
     
     struct SectionModel {
         var section: Int
