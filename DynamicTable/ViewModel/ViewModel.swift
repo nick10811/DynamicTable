@@ -13,30 +13,27 @@ protocol LoadingDelegate: AnyObject {
 }
 
 class ViewModel {
+    var pageType: PageType
     weak var delegate: LoadingDelegate?
     
-    struct SectionModel {
-        var section: Int
-        var items: [Model]
-        
-        subscript (_ index: Int) -> Model {
-            return items[index]
-        }
-    }
+    private var sectionSet: [BaseComponent] = []
     
-    private var sectionSet: [SectionModel] = []
+    init(_ type: PageType = .page1) {
+        pageType = type
+    }
     
     func loadData() {
         sectionSet.removeAll()
-        sectionSet.append(SectionModel(section: 0, items: DataSource.generateData()))
+        sectionSet.append(contentsOf: pageType.getLayout())
         delegate?.loadingDone()
     }
     
     func loadData(at: IndexPath) {
-        sectionSet = sectionSet.filter{ $0.section <= at.section }
+//        sectionSet = sectionSet.filter{ $0.section <= at.section }
         
-        let next = at.section + 1
-        sectionSet.append(SectionModel(section: next, items: DataSource.generateData(next)))
+//        let next = at.section + 1
+//        sectionSet.append(SectionModel(section: next, items: DataSource.generateData(next)))
+        sectionSet.append(contentsOf: pageType.getLayout(1))
         delegate?.loadingDone()
         
     }
@@ -54,10 +51,14 @@ class ViewModel {
     func modelForItemAt(_ indexPath: IndexPath) -> Model {
         return sectionSet[indexPath]
     }
+    
+    func modelForSectionAt(_ indexPath: IndexPath) -> BaseComponent {
+        return sectionSet[indexPath.section]
+    }
 }
 
 extension Array {
     subscript(_ indexPath: IndexPath) -> Model {
-        return (self[indexPath.section] as! ViewModel.SectionModel)[indexPath.item]
+        return (self[indexPath.section] as! BaseComponent)[indexPath.item]
     }
 }

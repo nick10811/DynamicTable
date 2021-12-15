@@ -16,6 +16,7 @@
 		F36FC8842761AB0500B087FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F36FC8822761AB0500B087FE /* LaunchScreen.storyboard */; };
 		F3BB3C692761D3B8001A6914 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BB3C682761D3B8001A6914 /* DataSource.swift */; };
 		F3CC8B39276892D50098B83C /* ComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CC8B38276892D50098B83C /* ComponentFactory.swift */; };
+		F3DE71362769E89000965252 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DE71352769E89000965252 /* Component.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F36FC8852761AB0500B087FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3BB3C682761D3B8001A6914 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		F3CC8B38276892D50098B83C /* ComponentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentFactory.swift; sourceTree = "<group>"; };
+		F3DE71352769E89000965252 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				F3CC8B38276892D50098B83C /* ComponentFactory.swift */,
+				F3DE71352769E89000965252 /* Component.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F36FC87C2761AB0300B087FE /* ViewController.swift in Sources */,
+				F3DE71362769E89000965252 /* Component.swift in Sources */,
 				F36FC8782761AB0300B087FE /* AppDelegate.swift in Sources */,
 				F300CC012761B8FA00C87A47 /* ViewModel.swift in Sources */,
 				F3BB3C692761D3B8001A6914 /* DataSource.swift in Sources */,

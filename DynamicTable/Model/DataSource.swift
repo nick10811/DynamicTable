@@ -9,7 +9,6 @@ import Foundation
 
 struct Model {
     var title: String
-    var hasNextCategory: Bool = Int.random(in: 0...10) % 2 == 0
     
     init(_ indexPath: IndexPath) {
         title = "[section:\(indexPath.section): item:\(indexPath.item)]"

@@ -12,14 +12,14 @@ enum PageType: CustomStringConvertible {
     case page1, page2, page3, page4
 
     // MARK: Factory Pattern
-    var getPageLayout: [ComponentType] {
+    var pageLayout: [BaseComponent] {
         switch self {
-        case .page1: return [.component1(), .component2(), .triggerComponent(),    // 1st category
-                             .component1(1), .component1(1), .triggerComponent(1), // 2nd category
-                             .component4(2)]                                       // 3rd category
-        case .page2: return [.component4(), .component3(), .component2()]
-        case .page3: return [.component2(), .component2()]
-        case .page4: return [.component3(), .component3(), .component1()]
+        case .page1: return [Component1(), Component2(), TriggerComponent(),    // 1st category
+                             Component1(1), Component1(1), TriggerComponent(1), // 2nd category
+                             Component4(2)]                                     // 3rd category
+        case .page2: return [Component4(), Component3(), Component2()]
+        case .page3: return [Component2(), Component2()]
+        case .page4: return [Component3(), Component3(), Component1()]
         }
     }
     
@@ -33,56 +33,10 @@ enum PageType: CustomStringConvertible {
         }
     }
     
-}
-
-enum ComponentType: CustomStringConvertible {
-    case component1(_ category: Int = 0),
-         component2(_ category: Int = 0),
-         component3(_ category: Int = 0),
-         component4(_ category: Int = 0),
-         component5(_ category: Int = 0),
-         component6(_ category: Int = 0),
-         triggerComponent(_ category: Int = 0)
-    
-    var backgroundColor: UIColor {
-        switch self {
-        case .component1: return .yellow
-        case .component2: return .blue
-        case .component3: return .green
-        case .component4: return .orange
-        case .triggerComponent: return .red
-        default: return .clear
+    func getLayout(_ category: Int = 0) -> [BaseComponent] {
+        return self.pageLayout.filter { component in
+            return component.category == category
         }
     }
     
-    var category: Int {
-        switch self {
-        case .component1(let num): return num
-        case .component2(let num): return num
-        case .component3(let num): return num
-        case .component4(let num): return num
-        case .component5(let num): return num
-        case .component6(let num): return num
-        case .triggerComponent(let num): return num
-        }
-    }
-    
-    var hasNextCategory: Bool {
-        switch self {
-        case .triggerComponent: return true
-        default: return false
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .component1: return "Component 1"
-        case .component2: return "Component 2"
-        case .component3: return "Component 3"
-        case .component4: return "Component 4"
-        case .component5: return "Component 5"
-        case .component6: return "Component 6"
-        case .triggerComponent: return "I have next category"
-        }
-    }
 }

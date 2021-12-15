@@ -60,7 +60,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         
         var content = cell.defaultContentConfiguration()
         content.text = model.title
-        content.secondaryText = model.hasNextCategory ? "next category" : ""
         cell.contentConfiguration = content
         
         return cell
@@ -68,8 +67,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let model = vm.modelForItemAt(indexPath)
-        if model.hasNextCategory {
+        let section = vm.modelForSectionAt(indexPath)
+        if section.hasNextCategory {
             print("[didSelectRowAt] section:\(indexPath.section) | row:\(indexPath.item)")
             vm.loadData(at: indexPath)
         }
