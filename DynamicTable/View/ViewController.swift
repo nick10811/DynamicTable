@@ -70,14 +70,17 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let section = vm.modelForSectionAt(indexPath)
         if section.hasNextCategory {
             print("[didSelectRowAt] section:\(indexPath.section) | row:\(indexPath.item)")
-            vm.loadData(at: indexPath)
+            vm.loadData(at: section.category)
         }
     }
 
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section: \(section)"
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let model = vm.modelForSectionAt(section)
+        let titleLabel = UILabel()
+        titleLabel.text = "Section[\(section)]: \(model.name)"
+        titleLabel.backgroundColor = model.backgroundColor
+        return titleLabel
     }
-    
 }
 
 // MARK: - LoadingDelegate

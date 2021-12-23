@@ -28,12 +28,11 @@ class ViewModel {
         delegate?.loadingDone()
     }
     
-    func loadData(at: IndexPath) {
-//        sectionSet = sectionSet.filter{ $0.section <= at.section }
+    func loadData(at: Int) {
+        sectionSet = sectionSet.filter{ $0.category <= at }
         
-//        let next = at.section + 1
-//        sectionSet.append(SectionModel(section: next, items: DataSource.generateData(next)))
-        sectionSet.append(contentsOf: pageType.getLayout(1))
+        let next = at + 1
+        sectionSet.append(contentsOf: pageType.getLayout(next))
         delegate?.loadingDone()
         
     }
@@ -53,7 +52,11 @@ class ViewModel {
     }
     
     func modelForSectionAt(_ indexPath: IndexPath) -> BaseComponent {
-        return sectionSet[indexPath.section]
+        return modelForSectionAt(indexPath.section)
+    }
+    
+    func modelForSectionAt(_ section: Int) -> BaseComponent {
+        return sectionSet[section]
     }
 }
 

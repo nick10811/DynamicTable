@@ -10,8 +10,8 @@ import Foundation
 struct Model {
     var title: String
     
-    init(_ indexPath: IndexPath) {
-        title = "[section:\(indexPath.section): item:\(indexPath.item)]"
+    init(_ category: Int) {
+        title = "category:\(category)"
     }
 }
 
@@ -19,8 +19,8 @@ class DataSource {
     static func generateData(_ section: Int = 0) -> [Model] {
         var dataSet: [Model] = []
         let max = Int.random(in: 2...10)
-        for i in 0...max {
-            dataSet.append(Model(IndexPath(item: i, section: section)))
+        for _ in 0...max {
+            dataSet.append(Model(section))
         }
         return dataSet
     }

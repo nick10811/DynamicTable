@@ -14,7 +14,7 @@ enum PageType: CustomStringConvertible {
     // MARK: Factory Pattern
     var pageLayout: [BaseComponent] {
         switch self {
-        case .page1: return [Component1(), Component2(), TriggerComponent(),    // 1st category
+        case .page1: return [Component1(), TriggerComponent(), Component2(),    // 1st category
                              Component1(1), Component1(1), TriggerComponent(1), // 2nd category
                              Component4(2)]                                     // 3rd category
         case .page2: return [Component4(), Component3(), Component2()]
