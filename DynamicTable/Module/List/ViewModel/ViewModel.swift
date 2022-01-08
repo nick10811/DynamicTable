@@ -41,6 +41,17 @@ class ViewModel {
         
     }
     
+    func cellIdentifier(for model: Model) -> String {
+        switch model {
+        case is Model1: return ComponentCell1.cellIdentifier()
+        case is Model2: return ComponentCell2.cellIdentifier()
+        case is Model3: return ComponentCell3.cellIdentifier()
+        case is Model4: return ComponentCell4.cellIdentifier()
+        case is MenuModel: return ComponentTriggerCell.cellIdentifier()
+        default: return ""
+        }
+    }
+    
     var numberOfItemsInSection: Int {
         get {
             return sectionSet.count

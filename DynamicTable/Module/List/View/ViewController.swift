@@ -59,33 +59,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = vm.modelForItemAt(indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: vm.cellIdentifier(for: model), for: indexPath)
         
-        // biding model & cell
-        switch model {
-        case is Model1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentCell1.cellIdentifier(), for: indexPath) as! ComponentCell1
+        // binding model & cell
+        if let cell = cell as? CellConfigurable {
             cell.config(for: model)
-            return cell
-        case is Model2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentCell2.cellIdentifier(), for: indexPath) as! ComponentCell2
-            cell.config(for: model)
-            return cell
-        case is Model3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentCell3.cellIdentifier(), for: indexPath) as! ComponentCell3
-            cell.config(for: model)
-            return cell
-        case is Model4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentCell4.cellIdentifier(), for: indexPath) as! ComponentCell4
-            cell.config(for: model)
-            return cell
-        case is MenuModel:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTriggerCell.cellIdentifier(), for: indexPath) as! ComponentTriggerCell
-            cell.config(for: model)
-            return cell
-        default:
-            return UITableViewCell()
         }
         
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
