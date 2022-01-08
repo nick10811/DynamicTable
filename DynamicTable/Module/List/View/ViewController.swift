@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     var tableView: UITableView!
-    let cellIdentifier: String = "Cell"
     lazy var vm: ViewModel = ViewModel()
 
     override func viewDidLoad() {
@@ -21,7 +20,11 @@ class ViewController: UIViewController {
     
     func setupTableView() {
         self.tableView = UITableView()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        self.tableView.register(ComponentCell1.self, forCellReuseIdentifier: ComponentCell1.cellIdentifier())
+        self.tableView.register(ComponentCell2.self, forCellReuseIdentifier: ComponentCell2.cellIdentifier())
+        self.tableView.register(ComponentCell3.self, forCellReuseIdentifier: ComponentCell3.cellIdentifier())
+        self.tableView.register(ComponentCell4.self, forCellReuseIdentifier: ComponentCell4.cellIdentifier())
+        self.tableView.register(ComponentTriggerCell.self, forCellReuseIdentifier: ComponentTriggerCell.cellIdentifier())
         self.view.addSubview(self.tableView)
         self.tableView.frame = self.view.frame
         
@@ -55,15 +58,34 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         let model = vm.modelForItemAt(indexPath)
         
-        var content = cell.defaultContentConfiguration()
-        content.text = model.title
-        content.secondaryText = model.hasNextCategory ? "next category" : ""
-        cell.contentConfiguration = content
+        // biding model & cell
+        switch model {
+        case is Model1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentCell1.cellIdentifier(), for: indexPath) as! ComponentCell1
+            cell.config(for: model)
+            return cell
+        case is Model2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentCell2.cellIdentifier(), for: indexPath) as! ComponentCell2
+            cell.config(for: model)
+            return cell
+        case is Model3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentCell3.cellIdentifier(), for: indexPath) as! ComponentCell3
+            cell.config(for: model)
+            return cell
+        case is Model4:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentCell4.cellIdentifier(), for: indexPath) as! ComponentCell4
+            cell.config(for: model)
+            return cell
+        case is MenuModel:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentTriggerCell.cellIdentifier(), for: indexPath) as! ComponentTriggerCell
+            cell.config(for: model)
+            return cell
+        default:
+            return UITableViewCell()
+        }
         
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

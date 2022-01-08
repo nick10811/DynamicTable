@@ -7,22 +7,17 @@
 
 import Foundation
 
-struct Model {
-    var title: String
-    var hasNextCategory: Bool = Int.random(in: 0...10) % 2 == 0
-    
-    init(_ indexPath: IndexPath) {
-        title = "[section:\(indexPath.section): item:\(indexPath.item)]"
-    }
-}
+//struct Model {
+//    var title: String
+//    var hasNextCategory: Bool = Int.random(in: 0...10) % 2 == 0
+//
+//    init(_ indexPath: IndexPath) {
+//        title = "[section:\(indexPath.section): item:\(indexPath.item)]"
+//    }
+//}
 
 class DataSource {
     static func generateData(_ section: Int = 0) -> [Model] {
-        var dataSet: [Model] = []
-        let max = Int.random(in: 2...10)
-        for i in 0...max {
-            dataSet.append(Model(IndexPath(item: i, section: section)))
-        }
-        return dataSet
+        return [Model1(), Model2(), Model3(), Model4(), MenuModel()]
     }
 }
