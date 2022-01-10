@@ -42,6 +42,7 @@ class ViewModel {
     }
     
     func cellIdentifier(for model: Model) -> String {
+        // HINT: mapping Model & Component(Cell)
         switch model {
         case is Model1: return ComponentCell1.cellIdentifier()
         case is Model2: return ComponentCell2.cellIdentifier()
